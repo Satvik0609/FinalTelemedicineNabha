@@ -28,8 +28,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { auth } from '../firebase/config';
-const BACKEND_URL = process.env.REACT_APP_API_URL;
-
 
 const SymptomChecker = () => {
   const { t } = useTranslation();
@@ -70,9 +68,10 @@ const SymptomChecker = () => {
 
       const token = await auth.currentUser.getIdToken();
       console.log('Sending symptoms:', symptoms);
+      console.log('Using URL: http://localhost:5000/api/analyze-symptoms');
       
       const response = await axios.post(
-        '${BACKEND_URL}/api/analyze-symptoms', // Use port 5000
+        'http://localhost:5000/api/analyze-symptoms', // Use port 5000
         { symptoms },
         { 
           headers: { 
